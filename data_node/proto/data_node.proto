@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "data_node/proto";
+
+package data_node;
+
+message UploadRequest {
+    string file_name = 2;
+    bytes chunk_data = 1;
+}
+
+message UploadResponse {}
+
+service DataNodeService {
+    rpc Upload (stream UploadRequest) returns (UploadResponse) {}
+}
