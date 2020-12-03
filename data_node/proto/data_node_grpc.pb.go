@@ -17,7 +17,14 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DataNodeServiceClient interface {
+	// Upload envía una solicitud para subir un archivo desde un cliente a un
+	// DataNode, luego el DataNode se encarga de subir el archivo
 	Upload(ctx context.Context, opts ...grpc.CallOption) (DataNodeService_UploadClient, error)
+	// Alive se utiliza para saber si una máquina está en linea
+	Alive(ctx context.Context, in *AliveRequest, opts ...grpc.CallOption) (*AliveResponse, error)
+	// Recieve se usa por los datanodes para pasarse chunks entre ellos cuando
+	// ya se aprobo una propuesta
+	Recieve(ctx context.Context, in *RecieveRequest, opts ...grpc.CallOption) (*RecieveResponse, error)
 }
 
 type dataNodeServiceClient struct {
@@ -62,11 +69,36 @@ func (x *dataNodeServiceUploadClient) CloseAndRecv() (*UploadResponse, error) {
 	return m, nil
 }
 
+func (c *dataNodeServiceClient) Alive(ctx context.Context, in *AliveRequest, opts ...grpc.CallOption) (*AliveResponse, error) {
+	out := new(AliveResponse)
+	err := c.cc.Invoke(ctx, "/data_node.DataNodeService/Alive", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataNodeServiceClient) Recieve(ctx context.Context, in *RecieveRequest, opts ...grpc.CallOption) (*RecieveResponse, error) {
+	out := new(RecieveResponse)
+	err := c.cc.Invoke(ctx, "/data_node.DataNodeService/Recieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DataNodeServiceServer is the server API for DataNodeService service.
 // All implementations must embed UnimplementedDataNodeServiceServer
 // for forward compatibility
 type DataNodeServiceServer interface {
+	// Upload envía una solicitud para subir un archivo desde un cliente a un
+	// DataNode, luego el DataNode se encarga de subir el archivo
 	Upload(DataNodeService_UploadServer) error
+	// Alive se utiliza para saber si una máquina está en linea
+	Alive(context.Context, *AliveRequest) (*AliveResponse, error)
+	// Recieve se usa por los datanodes para pasarse chunks entre ellos cuando
+	// ya se aprobo una propuesta
+	Recieve(context.Context, *RecieveRequest) (*RecieveResponse, error)
 	mustEmbedUnimplementedDataNodeServiceServer()
 }
 
@@ -76,6 +108,12 @@ type UnimplementedDataNodeServiceServer struct {
 
 func (UnimplementedDataNodeServiceServer) Upload(DataNodeService_UploadServer) error {
 	return status.Errorf(codes.Unimplemented, "method Upload not implemented")
+}
+func (UnimplementedDataNodeServiceServer) Alive(context.Context, *AliveRequest) (*AliveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Alive not implemented")
+}
+func (UnimplementedDataNodeServiceServer) Recieve(context.Context, *RecieveRequest) (*RecieveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Recieve not implemented")
 }
 func (UnimplementedDataNodeServiceServer) mustEmbedUnimplementedDataNodeServiceServer() {}
 
@@ -116,10 +154,55 @@ func (x *dataNodeServiceUploadServer) Recv() (*UploadRequest, error) {
 	return m, nil
 }
 
+func _DataNodeService_Alive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AliveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataNodeServiceServer).Alive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/data_node.DataNodeService/Alive",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataNodeServiceServer).Alive(ctx, req.(*AliveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DataNodeService_Recieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecieveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataNodeServiceServer).Recieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/data_node.DataNodeService/Recieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataNodeServiceServer).Recieve(ctx, req.(*RecieveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _DataNodeService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "data_node.DataNodeService",
 	HandlerType: (*DataNodeServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Alive",
+			Handler:    _DataNodeService_Alive_Handler,
+		},
+		{
+			MethodName: "Recieve",
+			Handler:    _DataNodeService_Recieve_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Upload",

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "name_node/proto";
+
+package name_node;
+
+message ProposalRequest {
+    repeated string ip_list = 1;
+}
+
+message ProposalResponse {
+    repeated string ip_list = 1;
+}
+
+service NameNodeService {
+    // El NameNode recibe una propuesta de distribución y envía la misma de
+    // vuelta en caso de aprobarla, o la nueva propueta en caso de rechazarla
+    rpc Proposal (ProposalRequest) returns (ProposalResponse) {}
+}

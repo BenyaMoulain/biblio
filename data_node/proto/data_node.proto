@@ -5,12 +5,32 @@ option go_package = "data_node/proto";
 package data_node;
 
 message UploadRequest {
-    string file_name = 2;
-    bytes chunk_data = 1;
+    string file_name = 1;
+    bytes chunk_data = 2;
 }
 
 message UploadResponse {}
 
+message AliveRequest {}
+
+message AliveResponse {}
+
+message RecieveRequest {
+    string file_name = 1;
+    bytes chunk_data = 2;
+}
+
+message RecieveResponse {}
+
 service DataNodeService {
+    // Upload envía una solicitud para subir un archivo desde un cliente a un
+    // DataNode, luego el DataNode se encarga de subir el archivo
     rpc Upload (stream UploadRequest) returns (UploadResponse) {}
+
+    // Alive se utiliza para saber si una máquina está en linea
+    rpc Alive (AliveRequest) returns (AliveResponse) {}
+
+    // Recieve se usa por los datanodes para pasarse chunks entre ellos cuando
+    // ya se aprobo una propuesta
+    rpc Recieve (RecieveRequest) returns (RecieveResponse) {}
 }

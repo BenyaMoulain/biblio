@@ -7,7 +7,6 @@ import (
 	"log"
 	"math"
 	"os"
-	"strconv"
 	"time"
 
 	dataNode "github.com/benyamoulain/biblio/data_node/proto"
@@ -15,7 +14,8 @@ import (
 )
 
 var (
-	serverAddr = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
+	serverAddr = flag.String("server_addr", "localhost:10000", "Dirección del servidor datanode en formato host:port")
+	file       = flag.String("file", "book1.pdf", "Nombre del archivo a ser subido")
 )
 
 func uploadFile(client dataNode.DataNodeServiceClient, fileName string) {
@@ -35,7 +35,6 @@ func uploadFile(client dataNode.DataNodeServiceClient, fileName string) {
 	var fileSize int64 = fileInfo.Size()
 
 	const fileChunk = 250000 // 250 KB
-	const chunkPath = "chunks/"
 
 	// calculate total number of parts the file will be chunked into
 
@@ -43,7 +42,7 @@ func uploadFile(client dataNode.DataNodeServiceClient, fileName string) {
 
 	fmt.Printf("Splitting to %d pieces.\n", totalPartsNum)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 	stream, err := client.Upload(ctx)
 	if err != nil {
@@ -59,7 +58,6 @@ func uploadFile(client dataNode.DataNodeServiceClient, fileName string) {
 		if err != nil {
 			log.Fatalf("Error al leer el buffer: %v", err)
 		}
-		fileName := chunkPath + "book_" + strconv.FormatUint(i, 10)
 
 		req := &dataNode.UploadRequest{
 			FileName:  fileName,
@@ -93,5 +91,5 @@ func main() {
 	}
 	defer conn.Close()
 	client := dataNode.NewDataNodeServiceClient(conn)
-	uploadFile(client, "./book1.pdf")
+	uploadFile(client, *file)
 }

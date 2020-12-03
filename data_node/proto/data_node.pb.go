@@ -30,8 +30,8 @@ type UploadRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FileName  string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	ChunkData []byte `protobuf:"bytes,1,opt,name=chunk_data,json=chunkData,proto3" json:"chunk_data,omitempty"`
+	FileName  string `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	ChunkData []byte `protobuf:"bytes,2,opt,name=chunk_data,json=chunkData,proto3" json:"chunk_data,omitempty"`
 }
 
 func (x *UploadRequest) Reset() {
@@ -118,6 +118,175 @@ func (*UploadResponse) Descriptor() ([]byte, []int) {
 	return file_data_node_proto_data_node_proto_rawDescGZIP(), []int{1}
 }
 
+type AliveRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *AliveRequest) Reset() {
+	*x = AliveRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_data_node_proto_data_node_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AliveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AliveRequest) ProtoMessage() {}
+
+func (x *AliveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_data_node_proto_data_node_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AliveRequest.ProtoReflect.Descriptor instead.
+func (*AliveRequest) Descriptor() ([]byte, []int) {
+	return file_data_node_proto_data_node_proto_rawDescGZIP(), []int{2}
+}
+
+type AliveResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *AliveResponse) Reset() {
+	*x = AliveResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_data_node_proto_data_node_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AliveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AliveResponse) ProtoMessage() {}
+
+func (x *AliveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_data_node_proto_data_node_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AliveResponse.ProtoReflect.Descriptor instead.
+func (*AliveResponse) Descriptor() ([]byte, []int) {
+	return file_data_node_proto_data_node_proto_rawDescGZIP(), []int{3}
+}
+
+type RecieveRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FileName  string `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	ChunkData []byte `protobuf:"bytes,2,opt,name=chunk_data,json=chunkData,proto3" json:"chunk_data,omitempty"`
+}
+
+func (x *RecieveRequest) Reset() {
+	*x = RecieveRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_data_node_proto_data_node_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecieveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecieveRequest) ProtoMessage() {}
+
+func (x *RecieveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_data_node_proto_data_node_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecieveRequest.ProtoReflect.Descriptor instead.
+func (*RecieveRequest) Descriptor() ([]byte, []int) {
+	return file_data_node_proto_data_node_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RecieveRequest) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *RecieveRequest) GetChunkData() []byte {
+	if x != nil {
+		return x.ChunkData
+	}
+	return nil
+}
+
+type RecieveResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *RecieveResponse) Reset() {
+	*x = RecieveResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_data_node_proto_data_node_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecieveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecieveResponse) ProtoMessage() {}
+
+func (x *RecieveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_data_node_proto_data_node_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecieveResponse.ProtoReflect.Descriptor instead.
+func (*RecieveResponse) Descriptor() ([]byte, []int) {
+	return file_data_node_proto_data_node_proto_rawDescGZIP(), []int{5}
+}
+
 var File_data_node_proto_data_node_proto protoreflect.FileDescriptor
 
 var file_data_node_proto_data_node_proto_rawDesc = []byte{
@@ -125,18 +294,35 @@ var file_data_node_proto_data_node_proto_rawDesc = []byte{
 	0x6f, 0x2f, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x09, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x22, 0x4b, 0x0a, 0x0d,
 	0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a,
-	0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x08, 0x66, 0x69, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x68,
-	0x75, 0x6e, 0x6b, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09,
+	0x75, 0x6e, 0x6b, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09,
 	0x63, 0x68, 0x75, 0x6e, 0x6b, 0x44, 0x61, 0x74, 0x61, 0x22, 0x10, 0x0a, 0x0e, 0x55, 0x70, 0x6c,
-	0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x54, 0x0a, 0x0f, 0x44,
-	0x61, 0x74, 0x61, 0x4e, 0x6f, 0x64, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x41,
-	0x0a, 0x06, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x18, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x5f,
-	0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x19, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x55,
-	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x28,
-	0x01, 0x42, 0x11, 0x5a, 0x0f, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x0e, 0x0a, 0x0c, 0x41,
+	0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x0f, 0x0a, 0x0d, 0x41,
+	0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x4c, 0x0a, 0x0e,
+	0x52, 0x65, 0x63, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b,
+	0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63,
+	0x68, 0x75, 0x6e, 0x6b, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52,
+	0x09, 0x63, 0x68, 0x75, 0x6e, 0x6b, 0x44, 0x61, 0x74, 0x61, 0x22, 0x11, 0x0a, 0x0f, 0x52, 0x65,
+	0x63, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xd6, 0x01,
+	0x0a, 0x0f, 0x44, 0x61, 0x74, 0x61, 0x4e, 0x6f, 0x64, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x41, 0x0a, 0x06, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x18, 0x2e, 0x64, 0x61,
+	0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64,
+	0x65, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x28, 0x01, 0x12, 0x3c, 0x0a, 0x05, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x12, 0x17, 0x2e,
+	0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f,
+	0x64, 0x65, 0x2e, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x42, 0x0a, 0x07, 0x52, 0x65, 0x63, 0x69, 0x65, 0x76, 0x65, 0x12, 0x19, 0x2e,
+	0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x52, 0x65, 0x63, 0x69, 0x65, 0x76,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x5f,
+	0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x52, 0x65, 0x63, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x11, 0x5a, 0x0f, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6e,
+	0x6f, 0x64, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -151,16 +337,24 @@ func file_data_node_proto_data_node_proto_rawDescGZIP() []byte {
 	return file_data_node_proto_data_node_proto_rawDescData
 }
 
-var file_data_node_proto_data_node_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_data_node_proto_data_node_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_data_node_proto_data_node_proto_goTypes = []interface{}{
-	(*UploadRequest)(nil),  // 0: data_node.UploadRequest
-	(*UploadResponse)(nil), // 1: data_node.UploadResponse
+	(*UploadRequest)(nil),   // 0: data_node.UploadRequest
+	(*UploadResponse)(nil),  // 1: data_node.UploadResponse
+	(*AliveRequest)(nil),    // 2: data_node.AliveRequest
+	(*AliveResponse)(nil),   // 3: data_node.AliveResponse
+	(*RecieveRequest)(nil),  // 4: data_node.RecieveRequest
+	(*RecieveResponse)(nil), // 5: data_node.RecieveResponse
 }
 var file_data_node_proto_data_node_proto_depIdxs = []int32{
 	0, // 0: data_node.DataNodeService.Upload:input_type -> data_node.UploadRequest
-	1, // 1: data_node.DataNodeService.Upload:output_type -> data_node.UploadResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: data_node.DataNodeService.Alive:input_type -> data_node.AliveRequest
+	4, // 2: data_node.DataNodeService.Recieve:input_type -> data_node.RecieveRequest
+	1, // 3: data_node.DataNodeService.Upload:output_type -> data_node.UploadResponse
+	3, // 4: data_node.DataNodeService.Alive:output_type -> data_node.AliveResponse
+	5, // 5: data_node.DataNodeService.Recieve:output_type -> data_node.RecieveResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -196,6 +390,54 @@ func file_data_node_proto_data_node_proto_init() {
 				return nil
 			}
 		}
+		file_data_node_proto_data_node_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AliveRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_data_node_proto_data_node_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AliveResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_data_node_proto_data_node_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecieveRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_data_node_proto_data_node_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecieveResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -203,7 +445,7 @@ func file_data_node_proto_data_node_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_data_node_proto_data_node_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
