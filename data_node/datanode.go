@@ -67,14 +67,14 @@ func (s *dataNodeServer) Upload(stream dataNode.DataNodeService_UploadServer) er
 
 				log.Printf("Guardando chunk %s", fullFileName)
 				ioutil.WriteFile(fullFileName, chunksArray[i], os.ModeAppend)
-				chunkIndex = division
+				chunkIndex++
 			}
 			for _, ip := range availableDN {
 				for i := 0; i < division; i++ {
 					indexedFileName := fmt.Sprintf("%s/%s_%d.data", *chunkPath, fileName, chunkIndex+i)
-					sendChunk(ip, indexedFileName, chunksArray[chunkIndex+i])
+					sendChunk(ip, indexedFileName, chunksArray[chunkIndex])
+					chunkIndex++
 				}
-				chunkIndex += division
 			}
 
 			return stream.SendAndClose(&dataNode.UploadResponse{})
@@ -108,6 +108,7 @@ func (s *dataNodeServer) Recieve(ctx context.Context, req *dataNode.RecieveReque
 		fmt.Println(createErr)
 		os.Exit(1)
 	}
+	log.Printf("Escribiendo chunk recibido: %s", fileName)
 	ioutil.WriteFile(fileName, chunkData, os.ModeAppend)
 	return &dataNode.RecieveResponse{}, nil
 }
