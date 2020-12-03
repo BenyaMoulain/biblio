@@ -235,7 +235,7 @@ func main() {
 		aliveMap[IPs[i]] = true
 	}
 
-	_ = os.Mkdir(*chunkPath, os.ModeDir)
+	_ = os.Mkdir(*chunkPath, 0700)
 
 	fmt.Printf("Iniciando servidor con algoritmo %s...\n", algorithmText)
 
