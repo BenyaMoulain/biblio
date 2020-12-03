@@ -23,4 +23,7 @@
 /vendor/
 /Godeps/
 
+# Carpeta con los chunks #
+/chunks/
+
 # End of https://www.toptal.com/developers/gitignore/api/go
